@@ -12,8 +12,10 @@ BEGIN
             id SERIAL PRIMARY KEY,
             room_id INTEGER NOT NULL REFERENCES rooms(id),
             sender_id INTEGER NOT NULL REFERENCES users(id),
-            timestamp TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            content TEXT NOT NULL
+            content TEXT NOT NULL,
+            created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            -- updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            -- deleted_at TIMESTAMPTZ
         );
 
         INSERT INTO migrations(migration_number) VALUES (current_migration_number);

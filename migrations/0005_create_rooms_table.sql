@@ -10,12 +10,16 @@ BEGIN
         -- Rooms Table
         CREATE TABLE rooms (
             id SERIAL PRIMARY KEY,
+            name CITEXT NOT NULL,
             class_id INTEGER NOT NULL REFERENCES classes(id),
-            creation_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
             ai_instructions TEXT,
-            updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            deleted_at TIMESTAMPTZ
         );
-
+        
+        CREATE UNIQUE INDEX rooms_name_class_id_deleted_at_unique_idx ON rooms (name, class_id, COALESCE(deleted_at, 'infinity'));
+        
         INSERT INTO migrations(migration_number) VALUES (current_migration_number);
     ELSE
         RAISE NOTICE 'Already ran migration %.', current_migration_number;

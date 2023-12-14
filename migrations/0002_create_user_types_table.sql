@@ -13,6 +13,16 @@ BEGIN
             type_description CITEXT UNIQUE NOT NULL
         );
 
+
+        INSERT INTO user_types (id, type_description)
+        VALUES
+            (1, 'Super Admin'),
+            (2, 'Admin'),
+            (3, 'Teacher'),
+            (4, 'Student'),
+            (5, 'Parents');
+
+
         INSERT INTO migrations(migration_number) VALUES (current_migration_number);
     ELSE
         RAISE NOTICE 'Already ran migration %.', current_migration_number;

@@ -13,7 +13,8 @@ BEGIN
             student_id INTEGER NOT NULL REFERENCES users(id),
             room_id INTEGER NOT NULL REFERENCES rooms(id),
             ai_response TEXT,
-            timestamp TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
         );
 
         INSERT INTO migrations(migration_number) VALUES (current_migration_number);
